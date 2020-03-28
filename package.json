@@ -1,0 +1,29 @@
+{
+    "name": "console-chat-client",
+    "version": "1.0.0",
+    "description": "chat via console.chat",
+    "main": "src/index.ts",
+    "scripts": {
+        "start": "npx tsc -w",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nmaier95/console-chat-client.git"
+    },
+    "keywords": [
+        "chat"
+    ],
+    "author": "Niklas Maier",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/nmaier95/console-chat-client/issues"
+    },
+    "homepage": "https://github.com/nmaier95/console-chat-client#readme",
+    "devDependencies": {
+        "typescript": "^3.8.3"
+    },
+    "dependencies": {
+        "tslib": "^1.11.1"
+    }
+}
