@@ -1,12 +1,12 @@
-import { IChat } from '../interfaces/IChat';
-import { IConfig } from '../interfaces/IConfig';
+import { Chat } from '../interfaces/Chat';
+import { Config } from '../interfaces/Config';
 import { SocketService } from '../services/SocketService';
 
-export class ConsoleChat extends Console implements IChat {
+export class ConsoleChat extends Console implements Chat {
 
     private request: SocketService;
 
-    constructor(config: IConfig) {
+    constructor(config: Config) {
         super();
         this.request = new SocketService(config.socketUrl);
     }

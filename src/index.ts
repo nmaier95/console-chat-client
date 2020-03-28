@@ -1,8 +1,6 @@
 import { ConsoleChat } from './console/Console';
-import { IConfig } from './interfaces/IConfig';
+import { Config } from './interfaces/Config';
 
-export function initChat(config: IConfig): void {
-    if(!console.hasOwnProperty('chat')) {
-        console = new ConsoleChat(config);
-    }
+export function initChat(config: Config): void {
+    console = new ConsoleChat(config);
 }

@@ -1,7 +1,7 @@
-import { ISocketState } from '../../interfaces/IState';
+import { SocketState } from '../../interfaces/State';
 import { SocketService } from '../SocketService';
 
-export class ClosedState implements ISocketState {
+export class ClosedState implements SocketState {
     socketService: SocketService;
 
     constructor(socketService: SocketService) {
@@ -17,6 +17,6 @@ export class ClosedState implements ISocketState {
     }
 
     receive(message: string): void {
-        console.error('connection closed. unable to receive messages!');
+        console.error(`connection closed. unable to receive messages! Did not sent message: ${message}`);
     }
 }

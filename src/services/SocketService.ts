@@ -1,13 +1,13 @@
-import { ISocketState } from '../interfaces/IState';
+import { SocketState } from '../interfaces/State';
 import { ClosedState } from "./states/ClosedState";
 import { OpenState } from "./states/OpenState";
 
 export class SocketService {
-    closedState: ISocketState;
-    openState: ISocketState;
-    messageState: ISocketState;
+    closedState: SocketState;
+    openState: SocketState;
+    messageState: SocketState;
 
-    socketState: ISocketState;
+    socketState: SocketState;
 
     socket: WebSocket;
     
@@ -26,13 +26,13 @@ export class SocketService {
         }
         
         this.socket = new WebSocket(url);
-        this.socket.onclose = () => this.setState(this.closedState);
-        this.socket.onerror = () => this.setState(this.closedState);
-        this.socket.onmessage = (message: MessageEvent) => this.receive(String(message));
-        this.socket.onopen = () => this.setState(this.openState);
+        this.socket.onclose = (): void => this.setState(this.closedState);
+        this.socket.onerror = (): void => this.setState(this.closedState);
+        this.socket.onmessage = (message: MessageEvent): void => this.receive(String(message));
+        this.socket.onopen = (): void => this.setState(this.openState);
     }
 
-    setState(state: ISocketState): void {
+    setState(state: SocketState): void {
         this.socketState = state;
     }
 

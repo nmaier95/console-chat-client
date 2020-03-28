@@ -1,7 +1,7 @@
-import { ISocketState } from '../../interfaces/IState';
+import { SocketState } from '../../interfaces/State';
 import { SocketService } from '../SocketService';
 
-export class OpenState implements ISocketState {
+export class OpenState implements SocketState {
     socketService: SocketService;
 
     constructor(socketService: SocketService) {
@@ -11,7 +11,7 @@ export class OpenState implements ISocketState {
     close(): Promise<void> {
         return new Promise((resolve) => {
             this.socketService.socket.close();
-            this.socketService.socket.close = () => {
+            this.socketService.socket.close = (): void => {
                 this.socketService.setState(this.socketService.closedState);
                 resolve();
             }
