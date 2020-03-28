@@ -28,12 +28,23 @@ export class SocketService {
         this.socket = new WebSocket(url);
         this.socket.onclose = (): void => this.setState(this.closedState);
         this.socket.onerror = (): void => this.setState(this.closedState);
-        this.socket.onmessage = (message: MessageEvent): void => this.receive(String(message));
+        this.socket.onmessage = (event: MessageEvent): void => {
+            console.log(event);
+            this.receive(String(event.data));
+        };
         this.socket.onopen = (): void => this.setState(this.openState);
     }
 
     setState(state: SocketState): void {
         this.socketState = state;
+    }
+
+    receive(message: string): void {
+        this.socketState.receive(message);
+    }
+
+    setUsername(username: string): void {
+        this.socketState.setUsername(username);
     }
 
     async close(): Promise<void> {
@@ -42,9 +53,5 @@ export class SocketService {
 
     async send(message: string): Promise<void> {
         this.socketState.send(message);
-    }
-
-    receive(message: string): void {
-        this.socketState.receive(message);
     }
 }

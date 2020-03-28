@@ -7,6 +7,10 @@ export class ClosedState implements SocketState {
     constructor(socketService: SocketService) {
         this.socketService = socketService;
     }
+
+    setUsername(username: string): void {
+        console.error(`connection closed. cannot set username ${username}`);
+    }
     
     async close(): Promise<void> {
         console.error(`connection already closed`);

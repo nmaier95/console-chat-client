@@ -5,4 +5,5 @@ export interface SocketState {
     close(): Promise<void>;
     send(message: string): void;
     receive(message: string): void;
+    setUsername(username: string): void;
 }
