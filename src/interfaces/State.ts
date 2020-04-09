@@ -1,9 +1,9 @@
-import { SocketService } from '../services/SocketService';
+import { BaseService } from '../services/BaseService';
 
-export interface SocketState {
-    socketService: SocketService;
+export interface State {
+    service: BaseService;
     close(): Promise<void>;
-    send(message: string): void;
-    receive(message: string): void;
-    setUsername(username: string): void;
+    send(message: string): Promise<void>;
+    receive(message: string): Promise<void>;
+    register(username: string, password: string): Promise<void>;
 }

@@ -1,18 +1,18 @@
 import { ConsoleChat } from './console/ConsoleChat';
 import { Config } from './interfaces/Config';
 
-if(!console.hasOwnProperty('chat')) {
-    const consoleChat = new ConsoleChat({socketUrl: 'ws://0.0.0.0:12345/index.php'});
+if(!console.hasOwnProperty('chat')) { // eslint-disable-line no-prototype-builtins
+    const consoleChat = new ConsoleChat({apiUrl: 'http://localhost/api/v1/'}); // ws://0.0.0.0:12345/index.php
     Object.assign(console, {
             chat: (message: string): void => {
                 consoleChat.chat(message);
             },
-            setUsername: (userName: string): void => {
-                consoleChat.setUsername(userName);
+            register: (userName: string, password: string): void => {
+                consoleChat.register(userName, password);
             }
         }
     );
 }
 // export function initChat(config: Config): void {
-//     console = new ConsoleChat({socketUrl: 'ws://0.0.0.0:12345/index.php'});
+//     console = new ConsoleChat({apiUrl: 'ws://0.0.0.0:12345/index.php'});
 // }

@@ -1,14 +1,14 @@
-import { SocketState } from '../../interfaces/State';
-import { SocketService } from '../SocketService';
+import { State } from '../../interfaces/State';
+import { SocketService } from '../../services/SocketService';
 
-export class ClosedState implements SocketState {
-    socketService: SocketService;
+export class ClosedState implements State {
+    service: SocketService;
 
     constructor(socketService: SocketService) {
-        this.socketService = socketService;
+        this.service = socketService;
     }
 
-    setUsername(username: string): void {
+    async register(username: string): Promise<void> {
         console.error(`connection closed. cannot set username ${username}`);
     }
     
@@ -16,11 +16,11 @@ export class ClosedState implements SocketState {
         console.error(`connection already closed`);
     }
 
-    send(message: string): void {
+    async send(message: string): Promise<void> {
         console.error(`connection closed. can't send message: ${message}`);
     }
 
-    receive(message: string): void {
+    async receive(message: string): Promise<void> {
         console.error(`connection closed. unable to receive messages! Did not sent message: ${message}`);
     }
 }

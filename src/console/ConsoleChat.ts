@@ -1,21 +1,22 @@
 import { Chat } from '../interfaces/Chat';
 import { Config } from '../interfaces/Config';
 import { SocketService } from '../services/SocketService';
+import { PollingService } from '../services/PollingService';
+import { BaseService } from '../services/BaseService';
 
 export class ConsoleChat implements Chat {
 
-    private socketService: SocketService;
+    private service: BaseService;
 
     constructor(config: Config) {
-        this.socketService = new SocketService(config.socketUrl);
+        this.service = config.apiUrl.startsWith('ws') ? new SocketService(config.apiUrl) : new PollingService(config.apiUrl);
     }
 
     async chat(message: string): Promise<void> {
-        if(!message) return;
-        await this.socketService.send(message);
+        await this.service.send(message);
     }
 
-    setUsername(username: string): void {
-        this.socketService.setUsername(username);
+    register(username: string, password: string): void {
+        this.service.register(username, password);
     }
 }

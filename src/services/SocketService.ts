@@ -1,57 +1,37 @@
-import { SocketState } from '../interfaces/State';
-import { ClosedState } from "./states/ClosedState";
-import { OpenState } from "./states/OpenState";
+import { ClosedState } from "../states/sockets/ClosedState";
+import { OpenState } from "../states/sockets/OpenState";
+import { BaseService } from './BaseService';
 
-export class SocketService {
-    closedState: SocketState;
-    openState: SocketState;
-    messageState: SocketState;
-
-    socketState: SocketState;
-
+export class SocketService extends BaseService{
+    closedState: ClosedState;
+    openState: OpenState;
     socket: WebSocket;
     
     constructor(url: string) {
+        super(url);
         this.closedState = new ClosedState(this);
         this.openState = new OpenState(this);
-        this.messageState = new OpenState(this);
         
         this.setState(this.closedState);
         this.connect(url);
     }
 
-    connect(url: string): void {
-        if(this.socketState === this.openState) {
-            this.close();
+    private async connect(url: string): Promise<void> {
+        if(this.state === this.openState) {
+            await this.close();
         }
         
         this.socket = new WebSocket(url);
         this.socket.onclose = (): void => this.setState(this.closedState);
         this.socket.onerror = (): void => this.setState(this.closedState);
-        this.socket.onmessage = (event: MessageEvent): void => {
-            console.log(event);
-            this.receive(String(event.data));
+        this.socket.onmessage = async (event: MessageEvent): Promise<void> => {
+            await this.receive(String(event.data));
         };
-        this.socket.onopen = (): void => this.setState(this.openState);
-    }
-
-    setState(state: SocketState): void {
-        this.socketState = state;
-    }
-
-    receive(message: string): void {
-        this.socketState.receive(message);
-    }
-
-    setUsername(username: string): void {
-        this.socketState.setUsername(username);
-    }
-
-    async close(): Promise<void> {
-        await this.socketState.close();
-    }
-
-    async send(message: string): Promise<void> {
-        this.socketState.send(message);
+        this.socket.onopen = (): void => {
+            window.onbeforeunload = (): void => {
+                this.close();
+            };
+            this.setState(this.openState);
+        };
     }
 }
