@@ -1,4 +1,5 @@
 import { State } from '../interfaces/State';
+import { Message } from '../interfaces/Message';
 
 export abstract class BaseService {
 
@@ -13,15 +14,17 @@ export abstract class BaseService {
     }
     
     setState(state: State): void {
+        if(this.state) this.state.unmount();
         this.state = state;
+        this.state.mounted();
     }
 
     async register(username: string, password: string): Promise<void> {
         await this.state.register(username, password);
     }
 
-    async receive(message: string): Promise<void> {
-        await this.state.receive(message);
+    async receive(message: Message): Promise<void> {
+        await this.state.receive([message]);
     }
 
     async close(): Promise<void> {

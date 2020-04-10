@@ -1,13 +1,15 @@
-import { State } from '../../interfaces/State';
 import { SocketService } from '../../services/SocketService';
+import { BaseState } from './../BaseState';
+import { Message } from '../../interfaces/Message';
 
-export class OpenState implements State {
+export class OpenState extends BaseState {
     service: SocketService;
 
     private username: string;
     private password: string;
 
     constructor(socketService: SocketService) {
+        super();
         this.service = socketService;
     }
 
@@ -29,9 +31,5 @@ export class OpenState implements State {
     async send(message: string): Promise<void> {
         if(!message) return;
         this.service.socket.send(`${this.username ? this.username + ': ' : ' '}${message}`);
-    }
-
-    async receive(message: string): Promise<void> {
-        console.log(message);
     }
 }

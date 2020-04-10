@@ -25,7 +25,7 @@ export class SocketService extends BaseService{
         this.socket.onclose = (): void => this.setState(this.closedState);
         this.socket.onerror = (): void => this.setState(this.closedState);
         this.socket.onmessage = async (event: MessageEvent): Promise<void> => {
-            await this.receive(String(event.data));
+            await this.receive(event.data);
         };
         this.socket.onopen = (): void => {
             window.onbeforeunload = (): void => {

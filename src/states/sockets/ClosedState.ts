@@ -1,10 +1,12 @@
-import { State } from '../../interfaces/State';
+import { BaseState } from './../BaseState';
 import { SocketService } from '../../services/SocketService';
+import { Message } from '../../interfaces/Message';
 
-export class ClosedState implements State {
+export class ClosedState extends BaseState {
     service: SocketService;
 
     constructor(socketService: SocketService) {
+        super();
         this.service = socketService;
     }
 
@@ -20,7 +22,7 @@ export class ClosedState implements State {
         console.error(`connection closed. can't send message: ${message}`);
     }
 
-    async receive(message: string): Promise<void> {
-        console.error(`connection closed. unable to receive messages! Did not sent message: ${message}`);
+    async receive(): Promise<void> {
+        console.error(`connection closed. unable to receive messages! Did not sent message.`);
     }
 }

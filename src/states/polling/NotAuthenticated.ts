@@ -1,23 +1,25 @@
-import { State } from '../../interfaces/State';
+import { BaseState } from './../BaseState';
 import { PollingService } from '../../services/PollingService';
+import { Message } from '../../interfaces/Message';
 
-export class NotAuthenticatedState implements State {
+export class NotAuthenticatedState extends BaseState {
     service: PollingService;
 
     constructor(service: PollingService) {
+        super();
         this.service = service;
     }
 
-    close(): Promise<void> {
-        throw new Error("Method not implemented.");
+    async close(): Promise<void> {
+        console.log('Client not authenticated. Can not close/logout!');
     }
 
     async send(message: string): Promise<void> {
-        throw new Error("Method not implemented.");
+        console.log('Client not authenticated. Can not send messages!');
     }
 
-    async receive(message: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    async receive(messages: Message[]): Promise<void> {
+        console.log('Client not authenticated. Can not receive messages!');
     }
 
     async register(username: string, password: string): Promise<void> {
