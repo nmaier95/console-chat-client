@@ -1,6 +1,5 @@
 import { BaseState } from './../BaseState';
 import { SocketService } from '../../services/SocketService';
-import { Message } from '../../interfaces/Message';
 
 export class ClosedState extends BaseState {
     service: SocketService;
@@ -19,7 +18,7 @@ export class ClosedState extends BaseState {
     }
 
     async send(message: string): Promise<void> {
-        console.error(`connection closed. can't send message: ${message}`);
+        console.log(`connection closed. can't send message: ${message}`);
     }
 
     async receive(): Promise<void> {

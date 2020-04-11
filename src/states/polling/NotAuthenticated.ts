@@ -1,6 +1,7 @@
 import { BaseState } from './../BaseState';
 import { PollingService } from '../../services/PollingService';
 import { Message } from '../../interfaces/Message';
+import { getEmoji, EMOJI } from '../../utils/emoji';
 
 export class NotAuthenticatedState extends BaseState {
     service: PollingService;
@@ -11,15 +12,15 @@ export class NotAuthenticatedState extends BaseState {
     }
 
     async close(): Promise<void> {
-        console.log('Client not authenticated. Can not close/logout!');
+        console.log(`${getEmoji(EMOJI.ERROR)} Client not authenticated. Can not close/logout!`);
     }
 
-    async send(message: string): Promise<void> {
-        console.log('Client not authenticated. Can not send messages!');
+    async send(): Promise<void> {
+        console.log(`${getEmoji(EMOJI.ERROR)} Client not authenticated. Can not send messages!`);
     }
 
-    async receive(messages: Message[]): Promise<void> {
-        console.log('Client not authenticated. Can not receive messages!');
+    async receive(): Promise<void> {
+        console.log(`${getEmoji(EMOJI.ERROR)} Client not authenticated. Can not receive messages!`);
     }
 
     async auth(username: string, password: string, action = 'create'): Promise<void> {

@@ -13,7 +13,7 @@ export class ConsoleChat implements Chat {
     }
 
     async chat(message: string): Promise<void> {
-        await this.service.send(message);
+        return await this.service.send(message);
     }
 
     register(username: string, password: string): void {

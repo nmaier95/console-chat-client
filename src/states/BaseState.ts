@@ -14,7 +14,7 @@ export abstract class BaseState implements State {
     }
 
     async receive(messages: Message[]): Promise<void> {
-        messages.forEach((message: Message) => console.log(`${message.userName}: ${message.message}`));
+        messages.forEach((message: Message) => console.log(`${message.user.username}: ${message.message}`));
     }
 
     abstract async close(): Promise<void>;

@@ -30,6 +30,6 @@ export class OpenState extends BaseState {
 
     async send(message: string): Promise<void> {
         if(!message) return;
-        this.service.socket.send(`${this.username ? this.username + ': ' : ' '}${message}`);
+        await this.service.socket.send(`${this.username ? this.username + ': ' : ' '}${message}`);
     }
 }

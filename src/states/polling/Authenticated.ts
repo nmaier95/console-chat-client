@@ -1,6 +1,7 @@
-import { Message } from '../../interfaces/Message';
+
 import { BaseState } from './../BaseState';
 import { PollingService } from '../../services/PollingService';
+import { getEmoji, EMOJI } from '../../utils/emoji';
 
 export class AuthenticatedState extends BaseState {
     service: PollingService;
@@ -35,9 +36,8 @@ export class AuthenticatedState extends BaseState {
         }
 
         this.isFetchingMessages = true;
-        const response = await fetch(`${this.service.apiEndpoint}/chat/receive?chat_room_id=${this.chatRoomId}
-                ${this.lastReceivedMessagesTimestamp ? '&timestamp=' + this.lastReceivedMessagesTimestamp : ''}
-            `, 
+        const response = await fetch(`${this.service.apiEndpoint}/chat/receive/${this.chatRoomId}
+            ${this.lastReceivedMessagesTimestamp ? '/' + this.lastReceivedMessagesTimestamp : ''}`.replace(/(\r\n|\n|\r|\s)/gm, ''),
             {
                 method: 'GET',
                 headers: {
@@ -51,7 +51,7 @@ export class AuthenticatedState extends BaseState {
 
         const responseBody = await response.json();
         if(responseBody.error) {
-            console.warn('server-error receiving messages.');
+            console.log(`${getEmoji(EMOJI.ERROR)} server-error receiving messages.`);
         } else {
             this.lastReceivedMessagesTimestamp = responseBody.timestamp;
             this.receive(responseBody.messages);
@@ -80,13 +80,16 @@ export class AuthenticatedState extends BaseState {
         });
 
         const responseBody = await response.json();
-
         if(responseBody.error) {
-            console.warn('server-error sending message.');
+            console.log(`${getEmoji(EMOJI.ERROR)} server-error sending message.`);
         }
+        
+        this.chatRoomId = responseBody.chat_room_id;
+
+        console.log(getEmoji(EMOJI.CHECK));
     }
 
     async auth(): Promise<void> {
-        console.log('Client already authenticated in. No need to authenticate again.');
+        console.log(`${getEmoji(EMOJI.ERROR)} Client already authenticated in. No need to authenticate again.`);
     }
 }

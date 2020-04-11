@@ -5,8 +5,9 @@ if(!console.hasOwnProperty('chat')) { // eslint-disable-line no-prototype-builti
     const consoleChat = new ConsoleChat({apiUrl: 'http://localhost/api/v1/'}); // ws://0.0.0.0:12345/index.php
     
     Object.assign(console, {
-            chat: (message: string): void => {
+            chat: (message: string): string => {
                 consoleChat.chat(message);
+                return 'sending...';
             },
             register: (userName: string, password: string): void => {
                 consoleChat.register(userName, password);
