@@ -8,5 +8,5 @@ export interface State {
     close(): Promise<void>;
     send(message: string): Promise<void>;
     receive(messages: Message[]): Promise<void>;
-    register(username: string, password: string): Promise<void>;
+    auth(username: string, password: string, action: string): Promise<void>;
 }

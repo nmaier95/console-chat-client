@@ -17,6 +17,14 @@ export class ConsoleChat implements Chat {
     }
 
     register(username: string, password: string): void {
-        this.service.register(username, password);
+        this.service.auth(username, password);
+    }
+
+    login(username: string, password: string): void {
+        this.service.auth(username, password, 'login');
+    }
+
+    logout(): void {
+        this.service.close();
     }
 }

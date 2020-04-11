@@ -22,8 +22,8 @@ export class NotAuthenticatedState extends BaseState {
         console.log('Client not authenticated. Can not receive messages!');
     }
 
-    async register(username: string, password: string): Promise<void> {
-        const response = await fetch(`${this.service.apiEndpoint}/user/create`, {
+    async auth(username: string, password: string, action = 'create'): Promise<void> {
+        const response = await fetch(`${this.service.apiEndpoint}/user/${action}`, {
             method: 'POST',
             body: JSON.stringify({
                 username, password

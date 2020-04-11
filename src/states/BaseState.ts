@@ -21,5 +21,5 @@ export abstract class BaseState implements State {
 
     abstract async send(message: string): Promise<void>;
 
-    abstract async register(username: string, password: string): Promise<void>;
+    abstract async auth(username: string, password: string, action: string): Promise<void>;
 }

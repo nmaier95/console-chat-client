@@ -13,7 +13,7 @@ export class OpenState extends BaseState {
         this.service = socketService;
     }
 
-    async register(username: string, password: string): Promise<void> {
+    async auth(username: string, password: string): Promise<void> {
         this.username = username;
         this.password = password;
     }

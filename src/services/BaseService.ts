@@ -19,8 +19,8 @@ export abstract class BaseService {
         this.state.mounted();
     }
 
-    async register(username: string, password: string): Promise<void> {
-        await this.state.register(username, password);
+    async auth(username: string, password: string, action = 'create'): Promise<void> {
+        await this.state.auth(username, password, action);
     }
 
     async receive(message: Message): Promise<void> {

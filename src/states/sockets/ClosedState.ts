@@ -10,7 +10,7 @@ export class ClosedState extends BaseState {
         this.service = socketService;
     }
 
-    async register(username: string): Promise<void> {
+    async auth(username: string): Promise<void> {
         console.error(`connection closed. cannot set username ${username}`);
     }
     

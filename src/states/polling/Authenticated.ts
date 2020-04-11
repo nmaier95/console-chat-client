@@ -86,7 +86,7 @@ export class AuthenticatedState extends BaseState {
         }
     }
 
-    async register(): Promise<void> {
-        console.log('Client already signed in. No need to register again.');
+    async auth(): Promise<void> {
+        console.log('Client already authenticated in. No need to authenticate again.');
     }
 }

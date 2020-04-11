@@ -2,7 +2,7 @@ import { ClosedState } from "../states/sockets/ClosedState";
 import { OpenState } from "../states/sockets/OpenState";
 import { BaseService } from './BaseService';
 
-export class SocketService extends BaseService{
+export class SocketService extends BaseService {
     closedState: ClosedState;
     openState: OpenState;
     socket: WebSocket;
