@@ -1,6 +1,9 @@
 const path = require('path');
 const fs = require('fs');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const mode = process.argv[process.argv.indexOf('--mode') + 1] ? process.argv[process.argv.indexOf('--mode') + 1] : 'development';
 
 module.exports = {
     // gets overwritten by --mode development/production of npm start command
@@ -12,15 +15,15 @@ module.exports = {
 
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist/compiled'),
     },
 
-    // optimization: {
-    //     minimize: true,
-    //     minimizer: [new TerserPlugin({
-    //         sourceMap: false
-    //     })],
-    // },
+    optimization: {
+        minimize:  mode === 'production' ? true : false,
+        minimizer: [new TerserPlugin({
+            sourceMap: mode === 'production' ? false : true,
+        })],
+    },
 
     resolve: {
         extensions: ['.ts', '.js']
@@ -44,6 +47,8 @@ module.exports = {
     },
 
     plugins: [
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['**/*'],
+        }),
     ]
 };
