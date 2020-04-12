@@ -3,6 +3,7 @@ import { Message } from './Message';
 
 export interface State {
     service: BaseService;
+    setApiToken(token: string): void;
     mounted(): Promise<void>;
     unmount(): Promise<void>;
     close(): Promise<void>;

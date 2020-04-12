@@ -8,6 +8,10 @@ export class ConsoleChat implements Chat {
 
     private service: BaseService;
 
+    getService(): BaseService {
+        return this.service;
+    }
+
     constructor(config: Config) {
         this.service = config.apiUrl.startsWith('ws') ? new SocketService(config.apiUrl) : new PollingService(config.apiUrl);
     }
@@ -16,15 +20,15 @@ export class ConsoleChat implements Chat {
         return await this.service.send(message);
     }
 
-    register(username: string, password: string): void {
-        this.service.auth(username, password);
+    async register(username: string, password: string): Promise<void> {
+        await this.service.auth(username, password);
     }
 
-    login(username: string, password: string): void {
-        this.service.auth(username, password, 'login');
+    async login(username: string, password: string): Promise<void> {
+        await this.service.auth(username, password, 'login');
     }
 
-    logout(): void {
-        this.service.close();
+    async logout(): Promise<void> {
+        await this.service.close();
     }
 }

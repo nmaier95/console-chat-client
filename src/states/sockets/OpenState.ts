@@ -1,9 +1,10 @@
 import { SocketService } from '../../services/SocketService';
 import { BaseState } from './../BaseState';
-import { Message } from '../../interfaces/Message';
 
 export class OpenState extends BaseState {
     service: SocketService;
+
+    apiToken: string;
 
     private username: string;
     private password: string;
@@ -11,6 +12,10 @@ export class OpenState extends BaseState {
     constructor(socketService: SocketService) {
         super();
         this.service = socketService;
+    }
+
+    setApiToken(token: string): void {
+        this.apiToken = token;
     }
 
     async auth(username: string, password: string): Promise<void> {

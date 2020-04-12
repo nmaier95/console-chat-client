@@ -21,6 +21,10 @@ export class AuthenticatedState extends BaseState {
         this.service = service;
     }
 
+    setApiToken(token: string): void {
+        this.apiToken = token;
+    }
+
     async mounted(): Promise<void> {
         await this.startPolling();
     }

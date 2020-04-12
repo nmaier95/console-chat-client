@@ -2,6 +2,7 @@
 /node_modules/*
 /dist/*
 /npm-error.log
+/coverage
 
 # MISC FILES
 .cache

@@ -4,6 +4,8 @@ import { Message } from '../interfaces/Message';
 
 export abstract class BaseState implements State {
     service: BaseService;
+
+    abstract setApiToken(token: string): void;
     
     async mounted(): Promise<void> {
         return;

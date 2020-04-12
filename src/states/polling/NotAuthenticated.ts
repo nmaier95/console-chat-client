@@ -1,10 +1,13 @@
 import { BaseState } from './../BaseState';
 import { PollingService } from '../../services/PollingService';
-import { Message } from '../../interfaces/Message';
 import { getEmoji, EMOJI } from '../../utils/emoji';
 
 export class NotAuthenticatedState extends BaseState {
     service: PollingService;
+
+    setApiToken(): void {
+        console.log('Client not authenticated. Can not set token.')
+    }
 
     constructor(service: PollingService) {
         super();
@@ -38,9 +41,9 @@ export class NotAuthenticatedState extends BaseState {
         const responseBody = await response.json();
 
         if(!responseBody.error && responseBody.token) {
-            this.service.setApiToken(responseBody.token);
             this.service.setState(this.service.authenticatedState);
+            this.service.setApiToken(responseBody.token);
         }
     }
-    
+
 }

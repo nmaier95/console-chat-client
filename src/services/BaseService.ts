@@ -19,6 +19,10 @@ export abstract class BaseService {
         this.state.mounted();
     }
 
+    setApiToken(token: string): void {
+        this.state.setApiToken(token);
+    }
+
     async auth(username: string, password: string, action = 'create'): Promise<void> {
         await this.state.auth(username, password, action);
     }

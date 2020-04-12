@@ -16,8 +16,4 @@ export class PollingService extends BaseService {
 
         this.setState(this.notAuthenticatedState);
     }
-
-    setApiToken(token: string): void {
-        this.authenticatedState.apiToken = token;
-    }
 }

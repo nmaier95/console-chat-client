@@ -9,6 +9,10 @@ export class ClosedState extends BaseState {
         this.service = socketService;
     }
 
+    setApiToken(): void {
+        console.log('connection closed. Can not set token.')
+    }
+
     async auth(username: string): Promise<void> {
         console.error(`connection closed. cannot set username ${username}`);
     }
