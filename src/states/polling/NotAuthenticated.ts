@@ -10,8 +10,7 @@ export class NotAuthenticatedState extends BaseState {
     }
 
     constructor(service: PollingService) {
-        super();
-        this.service = service;
+        super(service);
     }
 
     async close(): Promise<void> {
@@ -27,6 +26,10 @@ export class NotAuthenticatedState extends BaseState {
     }
 
     async auth(username: string, password: string, action = 'create'): Promise<void> {
+        if(action !== 'create' && action !== 'login') {
+            return;
+        }
+
         const response = await fetch(`${this.service.apiEndpoint}/user/${action}`, {
             method: 'POST',
             body: JSON.stringify({
@@ -39,11 +42,9 @@ export class NotAuthenticatedState extends BaseState {
         });
 
         const responseBody = await response.json();
-
         if(!responseBody.error && responseBody.token) {
             this.service.setState(this.service.authenticatedState);
             this.service.setApiToken(responseBody.token);
         }
     }
-
 }

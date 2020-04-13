@@ -9,9 +9,8 @@ export class OpenState extends BaseState {
     private username: string;
     private password: string;
 
-    constructor(socketService: SocketService) {
-        super();
-        this.service = socketService;
+    constructor(service: SocketService) {
+        super(service);
     }
 
     setApiToken(token: string): void {

@@ -4,9 +4,8 @@ import { SocketService } from '../../services/SocketService';
 export class ClosedState extends BaseState {
     service: SocketService;
 
-    constructor(socketService: SocketService) {
-        super();
-        this.service = socketService;
+    constructor(service: SocketService) {
+        super(service);
     }
 
     setApiToken(): void {
