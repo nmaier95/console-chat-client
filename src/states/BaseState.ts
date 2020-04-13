@@ -5,6 +5,10 @@ import { Message } from '../interfaces/Message';
 export abstract class BaseState implements State {
     service: BaseService;
 
+    constructor(service: BaseService) {
+        this.service = service;
+    }
+
     abstract setApiToken(token: string): void;
     
     async mounted(): Promise<void> {

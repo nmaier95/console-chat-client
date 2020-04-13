@@ -17,12 +17,17 @@ export class AuthenticatedState extends BaseState {
     lastReceivedMessagesTimestamp: number;
     
     constructor(service: PollingService) {
-        super();
-        this.service = service;
+        super(service);
     }
 
     setApiToken(token: string): void {
         this.apiToken = token;
+    }
+
+    getReceiveMessagesApiUrl(): string {
+        return `${this.service.apiEndpoint}/chat/receive/${this.chatRoomId}
+            ${this.lastReceivedMessagesTimestamp ? '/' + this.lastReceivedMessagesTimestamp : ''}`
+            .replace(/(\r\n|\n|\r|\s)/gm, '');
     }
 
     async mounted(): Promise<void> {
@@ -40,8 +45,7 @@ export class AuthenticatedState extends BaseState {
         }
 
         this.isFetchingMessages = true;
-        const response = await fetch(`${this.service.apiEndpoint}/chat/receive/${this.chatRoomId}
-            ${this.lastReceivedMessagesTimestamp ? '/' + this.lastReceivedMessagesTimestamp : ''}`.replace(/(\r\n|\n|\r|\s)/gm, ''),
+        const response = await fetch(this.getReceiveMessagesApiUrl(),
             {
                 method: 'GET',
                 headers: {
@@ -58,14 +62,14 @@ export class AuthenticatedState extends BaseState {
             console.log(`${getEmoji(EMOJI.ERROR)} server-error receiving messages.`);
         } else {
             this.lastReceivedMessagesTimestamp = responseBody.timestamp;
-            this.receive(responseBody.messages);
+            await this.receive(responseBody.messages);
         }
     }
     
     async close(): Promise<void> {
         window.clearInterval(this.pollingInterval);
         this.pollingInterval = null;
-        this.service.setApiToken('');
+        this.service.setApiToken(null);
         this.service.setState(this.service.notAuthenticatedState);
     }
     
@@ -94,6 +98,6 @@ export class AuthenticatedState extends BaseState {
     }
 
     async auth(): Promise<void> {
-        console.log(`${getEmoji(EMOJI.ERROR)} Client already authenticated in. No need to authenticate again.`);
+        console.log(`${getEmoji(EMOJI.ERROR)} Client already authenticated. No need to authenticate again.`);
     }
 }

@@ -16,7 +16,7 @@ module.exports = (config) => {
         // list of files / patterns to load in the browser
         files: [
             'src/**/*.ts',
-            '__tests__/**/*.spec.ts',
+            '__tests__/**/*.ts',
         ],
 
 
@@ -28,15 +28,15 @@ module.exports = (config) => {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/**/*.ts': ['karma-typescript',],
-            '__tests__/**/*.spec.ts': 'karma-typescript'
+            'src/**/*.ts': ['karma-typescript'],
+            '__tests__/**/*.ts': ['karma-typescript']
         },
 
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['coverage', 'karma-typescript',],
+        reporters: ['progress', 'coverage', 'karma-typescript',],
 
 
         // web server port
@@ -63,7 +63,7 @@ module.exports = (config) => {
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true,
 
         // Concurrency level
         // how many browser should be started simultaneous
@@ -74,31 +74,45 @@ module.exports = (config) => {
         },
 
         coverageReporter: {
-            type: 'text', // 'lcov' for ci system and then deployed to codecov.io
+            type: 'lcov', // 'lcov' for ci system and then deployed to codecov.io, 'text' for local coverage table inside of terminal
+            dir: 'coverage',
+            subdir: function(browser) {
+                // normalization process to keep a consistent browser name across different
+                // OS
+                return browser.toLowerCase().split(/[ /-]/)[0];
+            },
             check: {
                 global: {
-                    statements: 50,
-                    branches: 50,
-                    functions: 50,
-                    lines: 50,
+                    statements: 86.98,
+                    branches: 85.71,
+                    functions: 74.65,
+                    lines: 87.36,
                     excludes: [
-                        // 'foo/bar/**/*.js'
+                        // '__tests__/config/**/*.ts'
                     ]
                 },
                 each: { // on-file basis
-                    // statements: 50,
-                    // branches: 50,
-                    // functions: 50,
-                    // lines: 50,
-                    // excludes: [
-                    // ],
-                    // overrides: {
+                    statements: 93.62,
+                    branches: 88.24,
+                    functions: 90.91,
+                    lines: 94.87,
+                    excludes: [
+                        'src/states/sockets/*.ts',
+                        'src/services/SocketService.ts'
+                    ],
+                    overrides: {
                         // 'baz/component/**/*.js': {
                         //     statements: 98
                         // }
-                    // }
+                    }
                 }
             },
+        },
+
+        karmaTypescriptConfig: {
+            coverageOptions: {
+                exclude: [/(\__tests__\/.*|\.d)\.ts/i]
+            }
         },
     })
 }
