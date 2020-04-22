@@ -1,5 +1,5 @@
 {
-    "name": "@nmaier95/console-chat-client",
+    "name": "console-chat-client",
     "version": "0.0.1",
     "description": "chat via console.chat inside of developer tools.",
     "main": "dist/compiled/main.js",
