@@ -17,12 +17,13 @@ jobs:
         name: Clean install dependencies and build
         with:
           node-version: 12
-          registry-url: https://registry.npmjs.org/
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - run: npm install
-      - run: npm run build
-      - run: npm publish ./
+      - run: |
+            npm i
+            npm run build
+            npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
+            npm publish ./
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
