@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.commit
+.vscode
+.idea
+concept
+.github
+__tests__
+karma.conf.js
+test.html
