@@ -10,4 +10,5 @@ export interface State {
     send(message: string): Promise<void>;
     receive(messages: Message[]): Promise<void>;
     auth(username: string, password: string, action: string): Promise<void>;
+    setChatRoomId(id: number): void;
 }

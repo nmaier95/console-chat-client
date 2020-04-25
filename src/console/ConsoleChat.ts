@@ -31,4 +31,8 @@ export class ConsoleChat implements Chat {
     async logout(): Promise<void> {
         await this.service.close();
     }
+
+    async joinChatRoom(id: number): Promise<void> {
+        await this.service.setChatRoomId(id);
+    }
 }

@@ -38,4 +38,8 @@ export abstract class BaseService {
     async send(message: string): Promise<void> {
         await this.state.send(message);
     }
+
+    async setChatRoomId(id: number): Promise<void> {
+        await this.state.setChatRoomId(id);
+    }
 }

@@ -90,4 +90,11 @@ describe('NotAuthenticated', () => {
             done();
         });
     });
+
+    it('denies .setChatRoomId() call due to no yet established connection.', function () {
+        spyOn(console, 'log').and.callThrough();
+        notAuthenticatedState.setChatRoomId(32);
+
+        expect(console.log).toHaveBeenCalledWith(`${String.fromCodePoint(0x274C)} Client not authenticated. Can not join a chat-room.`);
+    });
 });

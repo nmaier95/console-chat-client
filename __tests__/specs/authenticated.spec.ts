@@ -116,4 +116,11 @@ describe('AuthenticatedState', () => {
         authenticatedState.auth();
         expect(console.log).toHaveBeenCalledWith(`${String.fromCodePoint(0x274C)} Client already authenticated. No need to authenticate again.`);
     });
+
+    it('sets chat-room-id', function () {
+        spyOn(authenticatedState, 'setChatRoomId').and.callThrough();
+        authenticatedState.setChatRoomId(32);
+        expect(authenticatedState.setChatRoomId).toHaveBeenCalledWith(32);
+        expect(authenticatedState.chatRoomId).toEqual(32);
+    });
 });

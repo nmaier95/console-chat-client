@@ -70,4 +70,12 @@ describe('PollingService', () => {
             done();
         });
     });
+
+    it('passes .setChatRoomId() to NotAuthenticatedState', () => {
+        spyOn(pollingService.state, 'setChatRoomId');
+
+        pollingService.setChatRoomId(21);
+
+        expect(pollingService.state.setChatRoomId).toHaveBeenCalledWith(21);
+    });
 });

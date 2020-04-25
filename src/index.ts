@@ -20,6 +20,9 @@ export function initChat(config: Config): void {
                 logout: (): void => {
                     consoleChat.logout();
                 },
+                join: (id: number): void => {
+                    consoleChat.joinChatRoom(id);
+                },
             }
         );
     }

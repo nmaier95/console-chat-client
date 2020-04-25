@@ -8,6 +8,7 @@
         "start": "webpack -w",
         "build": "webpack --mode production && npx tsc --sourceMap false",
         "test": "npx karma start karma.conf.js",
+        "test:locally": "npx karma start karma.conf.js --reportmode text",
         "lint": "npx eslint ./src --ext .ts --fix"
     },
     "repository": {

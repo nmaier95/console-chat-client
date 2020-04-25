@@ -47,4 +47,8 @@ export class NotAuthenticatedState extends BaseState {
             this.service.setApiToken(responseBody.token);
         }
     }
+
+    setChatRoomId(): void {
+        console.log(`${getEmoji(EMOJI.ERROR)} Client not authenticated. Can not join a chat-room.`);
+    }
 }

@@ -89,7 +89,7 @@ export class AuthenticatedState extends BaseState {
 
         const responseBody = await response.json();
         if(responseBody.error) {
-            console.log(`${getEmoji(EMOJI.ERROR)} server-error sending message.`);
+            console.log(`${getEmoji(EMOJI.ERROR)} server-error sending message. Valid chat-room-id used?`);
         }
         
         this.chatRoomId = responseBody.chat_room_id;
@@ -99,5 +99,9 @@ export class AuthenticatedState extends BaseState {
 
     async auth(): Promise<void> {
         console.log(`${getEmoji(EMOJI.ERROR)} Client already authenticated. No need to authenticate again.`);
+    }
+
+    setChatRoomId(id: number): void {
+        this.chatRoomId = id;
     }
 }

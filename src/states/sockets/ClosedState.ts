@@ -27,4 +27,8 @@ export class ClosedState extends BaseState {
     async receive(): Promise<void> {
         console.error(`connection closed. unable to receive messages! Did not sent message.`);
     }
+
+    setChatRoomId(): void {
+        console.log('Client not authenticated. Can not join a chat-room.');
+    }
 }

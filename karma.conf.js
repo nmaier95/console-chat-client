@@ -1,6 +1,12 @@
 // Karma configuration
 // Generated on Sat Apr 11 2020 22:49:40 GMT+0200 (GMT+02:00)
 
+const withTextCoverage =
+	process.argv[process.argv.indexOf('--reportmode') + 1] === 'text'
+		? true
+		: false;
+
+
 module.exports = (config) => {
     config.set({
 
@@ -74,7 +80,7 @@ module.exports = (config) => {
         },
 
         coverageReporter: {
-            type: 'lcov', // 'lcov' for ci system and then deployed to codecov.io, 'text' for local coverage table inside of terminal
+            type: withTextCoverage ? 'text': 'lcov', // 'lcov' for ci system and then deployed to codecov.io, 'text' for local coverage table inside of terminal
             dir: 'coverage',
             subdir: function(browser) {
                 // normalization process to keep a consistent browser name across different
@@ -83,10 +89,10 @@ module.exports = (config) => {
             },
             check: {
                 global: {
-                    statements: 86.98,
-                    branches: 85.71,
-                    functions: 74.65,
-                    lines: 87.36,
+                    statements: 87.72,
+                    branches: 87.5,
+                    functions: 76.92,
+                    lines: 87.69,
                     excludes: [
                         // '__tests__/config/**/*.ts'
                     ]

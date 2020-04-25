@@ -36,4 +36,8 @@ export class OpenState extends BaseState {
         if(!message) return;
         await this.service.socket.send(`${this.username ? this.username + ': ' : ' '}${message}`);
     }
+
+    setChatRoomId(): void {
+        throw new Error("Method not implemented.");
+    }
 }

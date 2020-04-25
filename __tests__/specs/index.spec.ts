@@ -50,4 +50,12 @@ describe('index', () => {
 
         expect(myConsole.logout).toHaveBeenCalledWith();
     });
+
+    it('calls .join() with correct parameters', () => {
+        spyOn(myConsole, 'join').and.callThrough();
+
+        myConsole.join(12);
+
+        expect(myConsole.join).toHaveBeenCalledWith(12);
+    });
 });
