@@ -90,7 +90,7 @@ module.exports = (config) => {
             check: {
                 global: {
                     statements: 87.72,
-                    branches: 87.5,
+                    branches: 87.32,
                     functions: 76.92,
                     lines: 87.69,
                     excludes: [

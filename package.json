@@ -2,7 +2,7 @@
     "name": "console-chat-client",
     "version": "0.0.1",
     "description": "chat via console.chat inside of developer tools.",
-    "main": "dist/compiled/main.js",
+    "main": "dist/es6/index.js",
     "scripts": {
         "ts": "npx tsc -w",
         "start": "webpack -w",

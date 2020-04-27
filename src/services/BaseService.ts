@@ -40,6 +40,6 @@ export abstract class BaseService {
     }
 
     async setChatRoomId(id: number): Promise<void> {
-        await this.state.setChatRoomId(id);
+        this.state.setChatRoomId(id);
     }
 }
