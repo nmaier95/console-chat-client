@@ -1,6 +1,6 @@
 {
     "name": "console-chat-client",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "chat via console.chat inside of developer tools.",
     "main": "dist/es6/index.js",
     "scripts": {
