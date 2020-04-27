@@ -100,13 +100,13 @@ describe('AuthenticatedState', () => {
 
     it('sends messages', function (done) {
         spyOn(window, 'fetch').and.callThrough();
-        spyOn(console, 'log').and.callThrough();
+        spyOn(authenticatedState, 'setChatRoomId').and.callThrough();
 
         authenticatedState.send('my message').then(() => {
             expect(window.fetch).toHaveBeenCalled();
 
             expect(authenticatedState.chatRoomId).toEqual(1);
-            expect(console.log).toHaveBeenCalledWith(String.fromCodePoint(0x2705));
+            expect(authenticatedState.setChatRoomId).toHaveBeenCalledWith(1);
             done();
         });
     });
@@ -117,10 +117,21 @@ describe('AuthenticatedState', () => {
         expect(console.log).toHaveBeenCalledWith(`${String.fromCodePoint(0x274C)} Client already authenticated. No need to authenticate again.`);
     });
 
-    it('sets chat-room-id', function () {
+    it('sets chat-room-id if not previously set', function () {
         spyOn(authenticatedState, 'setChatRoomId').and.callThrough();
         authenticatedState.setChatRoomId(32);
         expect(authenticatedState.setChatRoomId).toHaveBeenCalledWith(32);
         expect(authenticatedState.chatRoomId).toEqual(32);
+    });
+
+    it('doesn\'t set chat-room-id if same is already set', function () {
+        spyOn(authenticatedState, 'setChatRoomId').and.callThrough();
+        spyOn(console, 'log').and.callThrough();
+        
+        authenticatedState.setChatRoomId(32);
+        authenticatedState.setChatRoomId(32);
+
+        expect(authenticatedState.chatRoomId).toEqual(32);
+        expect(console.log).toHaveBeenCalledTimes(1);
     });
 });

@@ -27,7 +27,7 @@ export abstract class BaseState implements State {
     
     abstract async send(message: string): Promise<void>;
     
-    abstract async auth(username: string, password: string, action: string): Promise<void>;
+    abstract async auth(username: string, password: string, action?: 'create' | 'login'): Promise<void>;
     
     abstract setChatRoomId(id: number): void;
 }

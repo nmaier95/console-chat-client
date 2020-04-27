@@ -45,6 +45,8 @@ export class NotAuthenticatedState extends BaseState {
         if(!responseBody.error && responseBody.token) {
             this.service.setState(this.service.authenticatedState);
             this.service.setApiToken(responseBody.token);
+        } else {
+            console.log(`${getEmoji(EMOJI.ERROR)} ${responseBody.error}`);
         }
     }
 

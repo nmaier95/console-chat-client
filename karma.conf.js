@@ -89,19 +89,20 @@ module.exports = (config) => {
             },
             check: {
                 global: {
-                    statements: 87.72,
-                    branches: 87.32,
-                    functions: 76.92,
-                    lines: 87.69,
+                    statements: 96.89,
+                    branches: 94.83,
+                    functions: 98.08,
+                    lines: 97.14,
                     excludes: [
-                        // '__tests__/config/**/*.ts'
+                        'src/states/sockets/*.ts',
+                        'src/services/SocketService.ts'
                     ]
                 },
                 each: { // on-file basis
-                    statements: 93.62,
+                    statements: 92,
                     branches: 88.24,
                     functions: 90.91,
-                    lines: 94.87,
+                    lines: 92.86,
                     excludes: [
                         'src/states/sockets/*.ts',
                         'src/services/SocketService.ts'

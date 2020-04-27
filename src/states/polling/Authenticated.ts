@@ -90,11 +90,10 @@ export class AuthenticatedState extends BaseState {
         const responseBody = await response.json();
         if(responseBody.error) {
             console.log(`${getEmoji(EMOJI.ERROR)} server-error sending message. Valid chat-room-id used?`);
+            return;
         }
         
-        this.chatRoomId = responseBody.chat_room_id;
-
-        console.log(getEmoji(EMOJI.CHECK));
+        this.setChatRoomId(responseBody.chat_room_id);
     }
 
     async auth(): Promise<void> {
@@ -102,6 +101,9 @@ export class AuthenticatedState extends BaseState {
     }
 
     setChatRoomId(id: number): void {
-        this.chatRoomId = id;
+        if(this.chatRoomId !== id) {
+            this.chatRoomId = id;
+            console.log(`${getEmoji(EMOJI.CHECK)} you joined chatroom: ${this.chatRoomId}`);
+        }
     }
 }
